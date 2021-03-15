@@ -1,7 +1,9 @@
+require('dotenv').config()
+
 const express = require('express');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 const app = express();
 
 app.use('/', (req, res) =>{
