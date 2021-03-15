@@ -1,9 +1,11 @@
-const express = require('express')
+const express = require('express');
+const mongoose = require('mongoose');
 
-app = express()
+mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology: true});
+const app = express();
 
 app.use('/', (req, res) =>{
-	res.send('hello')
+	res.send('hello');
 });
 
-app.listen(8000, () => {console.log('Listening on port 8000')})
+app.listen(8000, () => {console.log('Listening on port 8000')});
