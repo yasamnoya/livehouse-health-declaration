@@ -34,7 +34,7 @@ describe('Test CRUD to declarations', () =>{
 			name: "Jane Doe",
 			phone: "0900000000"
 		};
-		const newResponse = await request(app).patch(`${TEST_PATH}/${response.body.id}`).send(newBody);
+		const newResponse = await request(app).patch(`${TEST_PATH}/${response.body._id}`).send(newBody);
 		expect(newResponse.statusCode).toBe(200)
 		expect(newResponse.body.name).toBe(newBody.name);
 		expect(newResponse.body.phone).toBe(newBody.phone);
@@ -47,8 +47,22 @@ describe('Test CRUD to declarations', () =>{
 		};
 		const response = await request(app).post(TEST_PATH).send(body);
 
-		const newResponse = await request(app).delete(`${TEST_PATH}/${response.body.id}`)
+		const newResponse = await request(app).delete(`${TEST_PATH}/${response.body._id}`)
 		expect(newResponse.statusCode).toBe(200)
+	});
+
+	test('It should reponse the GET method in detail', async () => {
+		const body = {
+			name: "Jane Doe",
+			phone: "0900000000"
+		};
+		const response = await request(app).post(TEST_PATH).send(body);
+
+		const newResponse = await request(app).get(`${TEST_PATH}/${response.body._id}`)
+		console.log(newResponse.body)
+		expect(newResponse.statusCode).toBe(200)
+		expect(newResponse.body.name).toBe(body.name);
+		expect(newResponse.body.phone).toBe(body.phone);
 	});
 });
 

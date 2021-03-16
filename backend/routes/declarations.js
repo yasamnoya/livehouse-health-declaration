@@ -11,6 +11,15 @@ router.get('/', async (req, res) => {
 	}
 });
 
+router.get('/:id', getDeclaration, async (req, res) => {
+	try {
+		const declaration = res.declaration
+		res.json(declaration);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+});
+
 router.post('/', async (req, res) => {
 	const declaration = new Declaration({
 		name: req.body.name,
@@ -33,16 +42,16 @@ router.patch('/:id', getDeclaration, async (req, res) => {
 		res.declaration.phone = req.body.phone;
 	}
 	try {
-		const updatedDeclaration = await declaration.save();
+		const updatedDeclaration = await res.declaration.save();
 		res.json(updatedDeclaration);
 	} catch (err) {
-		res.status(400).json({ message: er.message });
+		res.status(400).json({ message: err.message });
 	}
 });
 
-router.delete(':id', getDeclaration, async (req, res) => {
+router.delete('/:id', getDeclaration, async (req, res) => {
 	try {
-		await res.subscriber.remove();
+		await res.declaration.remove();
 		res.json({ message: 'Deleted declaration '});
 	} catch (err) {
 		res.status(500).json({ message: err.message });
@@ -56,7 +65,7 @@ async function getDeclaration(req, res, next) {
 		if (declaration == null) {
 			res.status(404).json({ message: 'Cannot find declaration' });
 		}
-	} catch {
+	} catch (err) {
 		return res.status(500).json({ message: err.message });
 	}
 
