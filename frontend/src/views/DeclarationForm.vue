@@ -56,6 +56,10 @@ import axios from 'axios'
 export default {
   name: 'DeclarationForm',
 
+  metaInfo: {
+    title: '入場實名表單'
+  },
+
   data: () => ({
     title: '入場實名表單',
     info: '因配合防疫，請詳實填寫以下實聯制表單。\n所蒐集的個人資料將依據「傳染病防治法」相關規範辦理，\n未來必要時將提供執行傳染病防疫工作的政府單位。\n同時提醒您，如有出入公共場合、人群眾多的室內空間，敬請配戴口罩並勤加洗手。',
