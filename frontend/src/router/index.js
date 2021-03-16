@@ -5,6 +5,10 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    redirect: '/declaration-form'
+  },
+  {
     path: '/declaration-form',
     name: 'DeclarationForm',
     component: () => import('../views/DeclarationForm.vue')
