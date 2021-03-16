@@ -40,6 +40,7 @@
                 block
                 color="primary"
                 elevation="4"
+                v-on:click="submit"
               >送出 Submit</v-btn>
             </v-col>
           </v-row>
@@ -50,6 +51,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'DeclarationForm',
 
@@ -59,6 +62,20 @@ export default {
     remind: '請截圖表單送出後頁面以利工作人員查驗',
     name: '',
     phone: ''
-  })
+  }),
+
+  methods: {
+    submit () {
+      const URL = 'http://localhost:8000/declarations'
+      const data = {
+        name: this.name,
+        phone: this.phone
+      }
+
+      axios.post(URL, data)
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err))
+    }
+  }
 }
 </script>
