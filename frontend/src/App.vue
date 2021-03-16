@@ -6,7 +6,7 @@
       dark
     >
       <div class="">
-        <v-app-bar-title>入場實名表單</v-app-bar-title>
+        <v-app-bar-title>防疫健康聲明</v-app-bar-title>
       </div>
 
       <v-spacer></v-spacer>

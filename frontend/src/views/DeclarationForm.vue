@@ -10,7 +10,7 @@
           <v-row>
             <v-col
               cols="12"
-              md="4"
+              md="12"
             >
               <v-text-field
                 v-model="name"
@@ -21,7 +21,7 @@
 
             <v-col
               cols="12"
-              md="4"
+              md="12"
             >
               <v-text-field
                 v-model="phone"
@@ -34,7 +34,7 @@
 
             <v-col
               cols="12"
-              md="4"
+              md="12"
             >
               <v-btn
                 block
