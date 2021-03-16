@@ -13,7 +13,7 @@
               md="12"
             >
               <v-text-field
-                v-model="name"
+                v-model="data.name"
                 label="姓名 Name"
                 required
               ></v-text-field>
@@ -24,7 +24,7 @@
               md="12"
             >
               <v-text-field
-                v-model="phone"
+                v-model="data.phone"
                 label="手機 Phone Number"
                 required
               ></v-text-field>
@@ -47,6 +47,16 @@
         </v-container>
       </v-form>
     </v-card>
+    <v-expand-transition>
+      <v-card
+        v-show="gotResponse"
+        class="mt-5"
+      >
+        <v-card-title class="display-1">已成功送出！</v-card-title>
+        <v-card-text>姓名 Name: {{ resData.name }}</v-card-text>
+        <v-card-text>手機 Phone Number: {{ resData.phone }}</v-card-text>
+      </v-card>
+    </v-expand-transition>
   </v-container>
 </template>
 
@@ -64,20 +74,27 @@ export default {
     title: '入場實名表單',
     info: '因配合防疫，請詳實填寫以下實聯制表單。\n所蒐集的個人資料將依據「傳染病防治法」相關規範辦理，\n未來必要時將提供執行傳染病防疫工作的政府單位。\n同時提醒您，如有出入公共場合、人群眾多的室內空間，敬請配戴口罩並勤加洗手。',
     remind: '請截圖表單送出後頁面以利工作人員查驗',
-    name: '',
-    phone: ''
+    data: {
+      name: '',
+      phone: ''
+    },
+    resData: {
+      name: '',
+      phone: ''
+    },
+    gotResponse: false
   }),
 
   methods: {
     submit () {
+      this.gotResponse = false
       const URL = 'http://localhost:8000/declarations'
-      const data = {
-        name: this.name,
-        phone: this.phone
-      }
 
-      axios.post(URL, data)
-        .then((res) => console.log(res.data))
+      axios.post(URL, this.data)
+        .then((res) => {
+          this.gotResponse = true
+          this.resData = res.data
+        })
         .catch((err) => console.log(err))
     }
   }
