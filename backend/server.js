@@ -9,8 +9,9 @@ db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to Database'))
 const app = express();
 
-app.use('/', (req, res) =>{
-	res.send('hello');
-});
+app.use(express.json());
+
+const declarationsRouter = require('./routes/declarations')
+app.use('/declarations', declarationsRouter);
 
 app.listen(8000, () => {console.log('Listening on port 8000')});
